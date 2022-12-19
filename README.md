@@ -20,7 +20,7 @@ This recognizes PAX that have posted 6 days in a row in a given week. It is only
 This recognizes a PAX that has posted at every AO in the region.
 
 #### _Q Traveler Milestones_
-THis recognizes a PAX that has Q'ed at every AO in the region.
+This recognizes a PAX that has Q'ed at every AO in the region.
 
 #### _Biggest Workout Milestones_
 This posts when a workout that day is the largest workout in the history of the region.

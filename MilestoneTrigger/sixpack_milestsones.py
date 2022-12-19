@@ -1,6 +1,5 @@
 import datetime
 import logging
-import config
 import pytz
 
 def get(connection, local_timezone):

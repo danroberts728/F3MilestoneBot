@@ -1,5 +1,4 @@
 import datetime
-import config
 import pytz
 import common
 import logging

@@ -15,6 +15,27 @@ The app will always skip Sundays and any day without a backblast posted when det
 #### Six Pack Milestones
 This recognizes PAX that have posted 6 days in a row in a given week. It is only posted on Sundays for the previous week. Unlike the other milestones, this is a group post on slack. For example, it may read: "6-Pack Alert! T-Claps to @Crafty, @Eskimo and @Cheerio for posting every day last week."
 
+### Potential Future Milestones
+#### _World Traveler Milestone_
+This recognizes a PAX that has posted at every AO in the region.
+
+#### _Q Traveler Milestones_
+THis recognizes a PAX that has Q'ed at every AO in the region.
+
+#### _Biggest Workout Milestones_
+This posts when a workout that day is the largest workout in the history of the region.
+
+#### _Total Men Led Milestones_
+This posts when a PAX has led X number of PAX as the Q of a workout. The value of X is configurable. For example, the total men led can be 100 and 500. Once any PAX reaches that number of men led, the app will post a message.
+
+## Multiple milestones
+In the event that there are multiple milestones in a single day, the app will schedule subsequent posts. The duration between posts is configurable.
+
+## Known issues
+There is no persistence of data, which creates limitations. The main limitation is that the app does not know if it has already posted a milestone. In order to prevent duplicate posts, the app only runs once per day. This creates an issue - if the app is run before all backblasts are posted for the day, it will not "know" if a certain milestone has been met for that day. Then the next day, it will assume it was posted previously and not post it. 
+
+In other words, all the day's backblasts must be posted before the app is run in order for it to post any milestones that were reached that day. The one exception to this is for the Six Pack milestone. For the Six Pack mlestone, all the previous week's backblasts must be posted before the app is run on the following Sunday.
+
 To install:
 - Rename config_sample.py to config.py
 - Update the values in the config file as needed (below will help guide you)
@@ -25,7 +46,7 @@ This app assumes you have a standard F3 database setup for PAXMiner. Your db_hos
 ## Timezone considerations
 The app uses pytz to set the local time in the app. You can get a list of all possible timezone values with pytz.all_timezones in Python. There are 595 possible values. Some US values include: 'US/Alaska', 'US/Aleutian', 'US/Arizona', 'US/Central', 'US-East-Indiana', 'US/Eastern', 'US/Hawaii', 'US/Indiana-Starke', 'US/Michigan', 'US/Mountain', 'US/Pacific', and 'US/Samoa'.
 
-The config value 'local_timezone' should be one of the 595 pytz timezone values.
+The config value 'local_timezone' should be one of the 595 available pytz timezone values.
 
 However, the app is also scheduled to run once a day within the MilestoneTrigger/function.json file. In this file, the cron-style scheduler is usually in UTC time unless you set up Azure to use a local timezone. 
 

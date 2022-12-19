@@ -4,7 +4,7 @@ import pytz
 import config
 import common
 
-def get(connection, divisor):
+def get(connection, divisor, local_timezone):
     sql = f"""           
         WITH workouts AS (
             SELECT 

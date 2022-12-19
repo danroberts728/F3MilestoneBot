@@ -4,7 +4,7 @@ import pytz
 import common
 import logging
 
-def get(connection, number):
+def get(connection, number, local_timezone):
     sql = f"""  SELECT 
                     av.pax, 
                     DATE_FORMAT( MAX(av.date), '%Y-%m-%d' ) AS last_post,
@@ -29,7 +29,7 @@ def get(connection, number):
         # Today's date in the same format as the SQL result above
         today = datetime.datetime.utcnow().replace(
             tzinfo=datetime.timezone.utc).astimezone(
-                tz=pytz.timezone(config.local_timezone)).strftime('%Y-%m-%d')
+                tz=pytz.timezone(local_timezone)).strftime('%Y-%m-%d')
 
         eligible_rows = list(filter(lambda r: r[2] == number and r[1] == today, results))
 

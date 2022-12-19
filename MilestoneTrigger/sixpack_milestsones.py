@@ -3,7 +3,7 @@ import logging
 import config
 import pytz
 
-def get(connection):
+def get(connection, local_timezone):
     sql = """   
         SELECT DISTINCT
             av.pax, u.user_id, MIN(av.date) as start, MAX(av.date) as stop, COUNT(av.pax) as streak
@@ -32,7 +32,7 @@ def get(connection):
     try:
         today = datetime.datetime.utcnow().replace(
             tzinfo=datetime.timezone.utc).astimezone(
-                tz=pytz.timezone(config.local_timezone)).strftime('%A')
+                tz=pytz.timezone(local_timezone)).strftime('%A')
         
         if today == 'Sunday':
             cursor = connection.cursor()

@@ -60,7 +60,7 @@ def get(connection, divisor):
 
         today = datetime.datetime.utcnow().replace(
             tzinfo=datetime.timezone.utc).astimezone(
-                tz=pytz.timezone(config.local_timezone)).strftime('%Y-%m-%d')
+                tz=pytz.timezone(local_timezone)).strftime('%Y-%m-%d')
 
         eligible_rows = list(filter(lambda r: r[2]%divisor == 0 and r[3] == today, results))
 

@@ -37,15 +37,15 @@ def main(mytimer: func.TimerRequest) -> None:
             # Total Posts
             if config.use_total_posts_milestone:
                 for num in config.total_post_milestone_numbers:
-                    posts +=  tpm.get(connection, num)
+                    posts +=  tpm.get(connection, num, config.local_timezone)
 
             # Streaks
             if config.use_streak_milestone:
-                posts += sm.get(connection, config.streak_divisor)
+                posts += sm.get(connection, config.streak_divisor, config.local_timezone)
 
             # 6-Pack Alert
             if config.use_six_pack_milestones:
-                posts += spm.get(connection)
+                posts += spm.get(connection, config.local_timezone)
 
     except Exception as err:
         logging.error("Failure: " + str(err))

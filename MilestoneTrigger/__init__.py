@@ -6,7 +6,10 @@ from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__))))
-import config
+try:
+    import config
+except Exception as err:
+    import config_sample as config
 import total_posts_milestones as tpm
 import streak_milestones as sm
 import sixpack_milestsones as spm

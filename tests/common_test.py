@@ -1,9 +1,6 @@
 import unittest
 import unittest.mock as mock
 
-import sys, os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../MilestoneTrigger')))
-
 import MilestoneTrigger.common as common
 
 class TestMakeOrdinal(unittest.TestCase):

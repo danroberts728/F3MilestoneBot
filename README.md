@@ -36,7 +36,7 @@ There is no persistence of data, which creates limitations. The main limitation 
 
 In other words, all the day's backblasts must be posted before the app is run in order for it to post any milestones that were reached that day. The one exception to this is for the Six Pack milestone. For the Six Pack mlestone, all the previous week's backblasts must be posted before the app is run on the following Sunday.
 
-To install:
+## To install:
 - Rename config_sample.py to config.py
 - Update the values in the config file as needed (below will help guide you)
 

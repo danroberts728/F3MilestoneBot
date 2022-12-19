@@ -1,4 +1,4 @@
-# F3MilestoneBot
+# F3MilestoneBot [![Python application](https://github.com/danroberts728/F3MilestoneBot/actions/workflows/python-app.yml/badge.svg)](https://github.com/danroberts728/F3MilestoneBot/actions/workflows/python-app.yml)
 
 The F3MilestoneBot is an Azure Function that reads an F3 PAXMiner database and posts certain PAX milestones. There are currently three types of milestones:
 

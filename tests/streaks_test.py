@@ -14,7 +14,7 @@ class TestStreaks(unittest.TestCase):
             mock_conn.cursor = mock.MagicMock()
             mock_conn.cursor.fetchall = []
 
-            result = milestones.get(mock_conn, 10)
+            result = milestones.get(mock_conn, 10, 'US/Central')
 
             assert len(result) == 0
 
@@ -26,7 +26,7 @@ class TestStreaks(unittest.TestCase):
                 ('Breach (Aaron Smith)', 258, 20, today, 'U257')
             ]
 
-            result = milestones.get(mock_conn, 10)
+            result = milestones.get(mock_conn, 10, 'US/Central')
 
             assert len(result) == 1
             assert "<@U257>" in result[0] 
@@ -45,7 +45,7 @@ class TestStreaks(unittest.TestCase):
                 ('Breach (Aaron Smith)', 50, 12, today, 'U257') #No
             ]
 
-            result = milestones.get(mock_conn, 10)
+            result = milestones.get(mock_conn, 10, 'US/Central')
 
             assert len(result) == 2
 

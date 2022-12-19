@@ -13,7 +13,7 @@ class TestSixPack(unittest.TestCase):
             mock_conn.cursor = mock.MagicMock()
             mock_conn.cursor.fetchall = []
 
-            result = milestones.get(mock_conn)
+            result = milestones.get(mock_conn, 'US/Central')
 
             assert len(result) == 0
 
@@ -26,7 +26,7 @@ class TestSixPack(unittest.TestCase):
                 ('Cheerio', 'U254', '2022-11-28', '2022-12-03', 6)
             ]
 
-            result = milestones.get(mock_conn)
+            result = milestones.get(mock_conn, 'US/Central')
 
             assert len(result) == 1
             assert "<@U254>" in result[0] 
@@ -43,7 +43,7 @@ class TestSixPack(unittest.TestCase):
                 ('Crafty', 'U253', '2022-11-28', '2022-12-03', 6)
             ]
 
-            result = milestones.get(mock_conn)
+            result = milestones.get(mock_conn, 'US/Central')
 
             assert len(result) == 1
             assert "<@U254>" in result[0] 
@@ -61,7 +61,7 @@ class TestSixPack(unittest.TestCase):
                 ('Cheerio', 'U254', '2022-11-28', '2022-12-03', 6),
             ]
 
-            result = milestones.get(mock_conn)
+            result = milestones.get(mock_conn, 'US/Central')
 
             assert len(result) == 1
             assert "<@U254>" in result[0] 

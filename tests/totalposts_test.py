@@ -14,7 +14,7 @@ class TestTotalPosts(unittest.TestCase):
             mock_conn.cursor = mock.MagicMock()
             mock_conn.cursor.fetchall = []
 
-            result = milestones.get(mock_conn, 50)
+            result = milestones.get(mock_conn, 50, 'US/Central')
 
             assert len(result) == 0
 
@@ -26,7 +26,7 @@ class TestTotalPosts(unittest.TestCase):
                 ('Breach (Aaron Smith)', today, 50, 1, 'U257')
             ]
 
-            result = milestones.get(mock_conn, 50)
+            result = milestones.get(mock_conn, 50, 'US/Central')
 
             assert len(result) == 1
             assert "<@U257>" in result[0] 
@@ -45,7 +45,7 @@ class TestTotalPosts(unittest.TestCase):
                 ('Breach (Aaron Smith)', today, 50, 5, 'U257')
             ]
 
-            result = milestones.get(mock_conn, 50)
+            result = milestones.get(mock_conn, 50, 'US/Central')
 
             assert len(result) == 2
 

@@ -37,11 +37,11 @@ def main(mytimer: func.TimerRequest) -> None:
             # Total Posts
             if config.use_total_posts_milestone:
                 for num in config.total_post_milestone_numbers:
-                    posts +=  tpm.get(connection, num, config.local_timezone)
+                    posts +=  tpm.get(connection, num, config.local_timezone, config.total_post_milestone_post)
 
             # Streaks
             if config.use_streak_milestone:
-                posts += sm.get(connection, config.streak_divisor, config.local_timezone)
+                posts += sm.get(connection, config.streak_divisor, config.local_timezone, config.sixpack_milestone_template)
 
             # 6-Pack Alert
             if config.use_six_pack_milestones:

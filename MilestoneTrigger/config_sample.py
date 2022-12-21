@@ -1,7 +1,6 @@
 ### Region name. This is only used in the post templates in this file 
 f3_region = "F3 Beast"
 
-
 ### Total Posts Milestone Settings
 use_total_posts_milestone = True
 total_post_milestone_numbers = [25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
@@ -12,6 +11,9 @@ streak_divisor = 10
 
 ### Six Pack Milestone Settings
 use_six_pack_milestones = True
+
+### All AOs Milestone Settings
+use_all_aos_milestone = True
 
 ### Database Settings
 db_host = '<db_url>'
@@ -52,3 +54,12 @@ sixpack_milestone_template = "6-Pack Alert! T-Claps to {tag_snippet} for posting
 # ${last_post}: The date of the last PAX's post, which should always be the current date, in YYYY-MM-DD format
 # ${pax_tag}: A tag for the post that will be a link to the user (i.e. @Ethanol)
 streak_milestone_template = "${streak_count}-Day Streak! ${pax_tag} is on fire with his ${ordinal_streak} post in a row."
+
+# Available tags for Streaks:
+# ${pax}: The name of the PAX. This will not be tagged
+# ${last_post}: The date of the last PAX's post, which should always be the current date, in YYYY-MM-DD format
+# ${pax_tag}: A tag for the post that will be a link to the user (i.e. @Ethanol)
+# ${ao_count}: The number of AOs the PAX has been to (also the total number of AOs)
+# ${ao_count_ord}: The ordinal version of the AO count (i.e. 9th)
+# ${ao}: The AO that they just hit to get all the AOs
+all_aos_milestone_template = f3_region + " Traveler! ${pax_tag} has now posted at all ${ao_count} AOs in the region."

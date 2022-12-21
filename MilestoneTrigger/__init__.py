@@ -13,6 +13,7 @@ except Exception as err:
 import total_posts_milestones as tpm
 import streak_milestones as sm
 import sixpack_milestsones as spm
+import all_aos_milestone as aom
 
 import azure.functions as func
 
@@ -45,7 +46,11 @@ def main(mytimer: func.TimerRequest) -> None:
 
             # 6-Pack Alert
             if config.use_six_pack_milestones:
-                posts += spm.get(connection, config.local_timezone)
+                posts += spm.get(connection, config.local_timezone, config.sixpack_milestone_template)
+
+            # All AOs
+            if config.use_all_aos_milestone:
+                posts += aom.get(connection, config.local_timezone, config.all_aos_milestone_template)
 
     except Exception as err:
         logging.error("Failure: " + str(err))

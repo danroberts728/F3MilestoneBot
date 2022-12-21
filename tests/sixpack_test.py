@@ -7,8 +7,6 @@ import MilestoneTrigger.sixpack_milestsones as milestones
 
 template ="Testing milestone_count ${milestone_count} tag_snippet ${tag_snippet}"
 
-today = '2022-12-04'
-
 class TestSixPack(unittest.TestCase):
     def test_emptyquery(self):
         with mock.patch('mysql.connector.connection') as mock_conn:

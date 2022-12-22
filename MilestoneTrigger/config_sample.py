@@ -15,18 +15,10 @@ use_six_pack_milestones = True
 ### All AOs Milestone Settings
 use_all_aos_milestone = True
 
-### Database Settings
-db_host = '<db_url>'
-db_database = '<db_name>'
-db_username = '<db_username'
-db_password = '<db_password>'
-
 ### Timezone Settings
 local_timezone = 'US/Central'
 
-### Slack API Settings
-slack_api_token = '<app_token>'
-post_channel_id = '<channel_id>'
+### Post delay
 minutes_between_posts = 60
 
 ### Post Templates
@@ -36,10 +28,10 @@ minutes_between_posts = 60
 # ${last_post}: The date of the last PAX's post, which should always be the current date, in YYYY-MM-DD format
 # ${posts_num}: The total number of posts for the PAX (i.e. 50)
 # ${pax_tag}: A tag for the post that will be a link to the user (i.e. @Ethanol)
-# ${post_ord}: An ordinal version of the number of posts for the PAX (i.e. 50th)
+# ${posts_ord}: An ordinal version of the number of posts for the PAX (i.e. 50th)
 # ${rank_num}: The rank of the PAX reaching this milestone. (i.e. 39)
 # ${rank_ord}: The ordinal version of the rank fo the PAX reaching this milestone (i.e. 39th)
-total_post_milestone_template = "${posts_num} posts! Congratulations to ${pax_tag} for making his ${post_ord} post to " + f3_region + ". He is the ${rank_ord} PAX to reach this milestone."
+total_post_milestone_template = "${posts_num} posts! Congratulations to ${pax_tag} for making his ${posts_ord} post to " + f3_region + ". He is the ${rank_ord} PAX to reach this milestone."
 
 # Available tags for Six Pack:
 # ${milestone_count}: The number of PAX who reached the milestone this week (i.e. 3)

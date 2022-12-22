@@ -7,3 +7,4 @@ pytz
 slack_sdk
 requests
 mysql-connector-python
+python-dotenv

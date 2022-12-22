@@ -4,6 +4,7 @@ import mysql.connector
 import sys, os
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
+from dotenv import load_dotenv
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__))))
 try:
@@ -17,6 +18,7 @@ import all_aos_milestone as aom
 
 import azure.functions as func
 
+load_dotenv()
 
 def main(mytimer: func.TimerRequest) -> None:
     utc_timestamp = datetime.datetime.utcnow().replace(
@@ -25,14 +27,22 @@ def main(mytimer: func.TimerRequest) -> None:
     if mytimer.past_due:
         logging.info('The timer is past due!')
 
+    # Consume environment variables
+    db_host = os.environ['F3M_PAXMINER_DB_HOST']
+    db_database = os.environ['F3M_PAXMINER_DB_DATABASE']
+    db_username = os.environ['F3M_PAXMINER_DB_USERNAME']
+    db_password = os.environ['F3M_PAXMINER_DB_PASSWORD']
+    slack_api_token = os.environ['F3M_SLACK_API_TOKEN']
+    post_channel_id = os.environ['F3M_SLACK_POST_CHANNEL_ID']
+
     # Get Slack posts
     posts = []
     try:
         with mysql.connector.connect(
-            host=config.db_host,
-            database=config.db_database,
-            user=config.db_username,
-            password=config.db_password
+            host=db_host,
+            database=db_database,
+            user=db_username,
+            password=db_password
         ) as connection:
 
             # Total Posts
@@ -58,7 +68,7 @@ def main(mytimer: func.TimerRequest) -> None:
 
     # Post slack posts on delay
     try:
-        slack = WebClient(token=config.slack_api_token)
+        slack = WebClient(token=slack_api_token)
         # Add 30 seconds so it doesn't complain about scheduling in the past
         schedule_datetime = datetime.datetime.now() + datetime.timedelta(seconds=30)
         minutes_between_posts = datetime.timedelta(minutes=config.minutes_between_posts)
@@ -66,7 +76,7 @@ def main(mytimer: func.TimerRequest) -> None:
         for p in posts:
             # Schedule post
             result = slack.chat_scheduleMessage(
-                channel=config.post_channel_id,
+                channel=post_channel_id,
                 text=p,
                 post_at=int(schedule_datetime.timestamp())
             )

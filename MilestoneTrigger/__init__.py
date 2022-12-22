@@ -7,10 +7,7 @@ from slack_sdk.errors import SlackApiError
 from dotenv import load_dotenv
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__))))
-try:
-    import config
-except Exception as err:
-    import config_sample as config
+import config
 import total_posts_milestones as tpm
 import streak_milestones as sm
 import sixpack_milestsones as spm

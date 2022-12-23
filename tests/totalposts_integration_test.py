@@ -37,6 +37,8 @@ class TestTotalPostsIntegration(unittest.TestCase):
                 FROM attendance_view av 
                 GROUP BY pax HAVING last_post = CURDATE()""")
             result = list( cursor.fetchall() )
+            if len(result) == 0:
+                return
             just_counts = list( map(lambda x: x[2], result) )
             posts_number_mode = max(set(just_counts), key=just_counts.count)
             expected_length = len( list( filter(lambda r: r[2] == posts_number_mode, result) ) )

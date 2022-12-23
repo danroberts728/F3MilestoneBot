@@ -4,7 +4,10 @@ import pytz
 import string
 
 def get(connection, local_timezone, post_template):
-    sql = """   
+    date_now = datetime.datetime.utcnow().replace(
+            tzinfo=datetime.timezone.utc).astimezone(
+                tz=pytz.timezone(local_timezone)).strftime('%Y-%m-%d')
+    sql = f"""   
         SELECT DISTINCT
             av.pax, u.user_id, MIN(av.date) as start, MAX(av.date) as stop, COUNT(av.pax) as streak
         FROM attendance_view av 
@@ -16,8 +19,8 @@ def get(connection, local_timezone, post_template):
         WHERE av.date IN (
             SELECT DISTINCT bi.date
                 FROM beatdown_info bi 
-                WHERE bi.date BETWEEN DATE_ADD(CURDATE(), INTERVAL -6 DAY)
-                        AND DATE_ADD(CURDATE(), INTERVAL -1 DAY)
+                WHERE bi.date BETWEEN DATE_ADD('{date_now}', INTERVAL -6 DAY)
+                        AND DATE_ADD('{date_now}', INTERVAL -1 DAY)
                     AND DAYOFWEEK(bi.date) != 1
         )
         GROUP BY av.pax, u.user_id

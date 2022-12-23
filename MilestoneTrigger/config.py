@@ -36,7 +36,7 @@ total_post_milestone_template = "${posts_num} posts! Congratulations to ${pax_ta
 # ${milestone_count}: The number of PAX who reached the milestone this week (i.e. 3)
 # ${tag_snippet}: A tagged list of the PAX who reached the milestone this week (i.e. "Crafty, Dredd, and Spit Valve"
 #   or "Crafty and Spit Valve" or just "Spit Valve")
-sixpack_milestone_template = "6-Pack Alert! T-Claps to {tag_snippet} for posting every day last week."
+sixpack_milestone_template = "6-Pack Alert! T-Claps to ${tag_snippet} for posting every day last week."
 
 # Available tags for Streaks:
 # ${pax}: The name of the PAX. This will not be tagged
@@ -44,7 +44,7 @@ sixpack_milestone_template = "6-Pack Alert! T-Claps to {tag_snippet} for posting
 # ${streak_count_ord}: THe ordinal versino fo the number of posts in the current streak (i.e. 10th)
 # ${last_post}: The date of the last PAX's post, which should always be the current date, in YYYY-MM-DD format
 # ${pax_tag}: A tag for the post that will be a link to the user (i.e. @Ethanol)
-streak_milestone_template = "${streak_count}-Day Streak! ${pax_tag} is on fire with his ${ordinal_streak} post in a row."
+streak_milestone_template = "${streak_count}-Day Streak! ${pax_tag} is on fire with his ${streak_count_ord} post in a row."
 
 # Available tags for Streaks:
 # ${pax}: The name of the PAX. This will not be tagged

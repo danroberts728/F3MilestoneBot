@@ -3,7 +3,7 @@ import unittest.mock as mock
 from datetime import datetime
 from freezegun import freeze_time
 
-import MilestoneTrigger.sixpack_milestsones as milestones
+import MilestoneTrigger.sixpack_milestones as milestones
 
 template ="Testing milestone_count ${milestone_count} tag_snippet ${tag_snippet}"
 

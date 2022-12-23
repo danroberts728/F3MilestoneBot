@@ -10,7 +10,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__))))
 import config
 import total_posts_milestones as tpm
 import streak_milestones as sm
-import sixpack_milestsones as spm
+import sixpack_milestones as spm
 import all_aos_milestone as aom
 
 import azure.functions as func

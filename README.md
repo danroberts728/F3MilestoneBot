@@ -1,4 +1,4 @@
-# F3MilestoneBot [![Python application](https://github.com/danroberts728/F3MilestoneBot/actions/workflows/python-app.yml/badge.svg)](https://github.com/danroberts728/F3MilestoneBot/actions/workflows/python-app.yml)
+# F3MilestoneBot [![Dev Tests](https://github.com/danroberts728/F3MilestoneBot/actions/workflows/dev_tests.yml/badge.svg)](https://github.com/danroberts728/F3MilestoneBot/actions/workflows/dev_tests.yml)
 
 The F3MilestoneBot is an Azure Function that reads an F3 PAXMiner database and posts certain PAX milestones. There are currently three types of milestones:
 
@@ -22,11 +22,17 @@ This recognizes a PAX that has posted at every AO in the region.
 #### _Q Traveler Milestones_
 This recognizes a PAX that has Q'ed at every AO in the region.
 
-#### _Biggest Workout Milestones_
+#### _Max Attendance Milestone_
 This posts when a workout that day is the largest workout in the history of the region.
 
 #### _Total Men Led Milestones_
 This posts when a PAX has led X number of PAX as the Q of a workout. The value of X is configurable. For example, the total men led can be 100 and 500. Once any PAX reaches that number of men led, the app will post a message.
+
+#### _Annual Posts Milestones_
+This recongizes PAX that have reached a certain number of posts in the current year. The number of posts are configurable. There is also a recommended configuration to turn off the milestone for PAX that are in their first year to prevent duplicates.
+
+#### _Weekly Stats_ 
+This is a weekly post that gives the stats for the week and compares it to the year. It can show the total posts, the breakdown by day, the average weekly posts for the year, the max posts per year, and an indication of whether the current week is a new record.
 
 ## Multiple milestones
 In the event that there are multiple milestones in a single day, the app will schedule subsequent posts. The duration between posts is configurable.

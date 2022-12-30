@@ -1,8 +1,9 @@
 import datetime
 import logging
 import pytz
+import string
 
-def get(connection, local_timezone):
+def get(connection, local_timezone, post_template):
     sql = """   
         SELECT DATE_FORMAT( bi.date, '%Y-%m-%d' ) AS date, ao, q, pax_count, u.user_id as q_id
         FROM beatdown_info bi
@@ -15,8 +16,6 @@ def get(connection, local_timezone):
     """
 
     try:
-        slack_posts = []
-
         today = datetime.datetime.utcnow().replace(
             tzinfo=datetime.timezone.utc).astimezone(
                 tz=pytz.timezone(local_timezone)).strftime('%Y-%m-%d')
@@ -35,9 +34,17 @@ def get(connection, local_timezone):
                 q_id = row[4]
 
             if date == today:
-                slack_posts.append(f"New Record! Congratulations to <@{q_id}> for Q'ing a workout attendance record for F3 BEast with @{pax_count} PAX at @{ao}")
-        
-        return slack_posts
+                template_substitutes = dict(
+                    ao = ao,
+                    q = q,
+                    q_tag = f"<@{q_id}>",
+                    pax_count = pax_count
+                )
+                return [ string.Template(post_template).substitute(template_substitutes) ]
+            else:
+                return []
+        else:
+            return []
 
     except Exception as e:
         logging.error("Failure: " + str(e))

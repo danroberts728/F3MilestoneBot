@@ -15,6 +15,9 @@ use_six_pack_milestones = True
 ### All AOs Milestone Settings
 use_all_aos_milestone = True
 
+### Max Attendence Milestone Settings
+use_max_attendance_milestone = True
+
 ### Timezone Settings
 local_timezone = "US/Central"
 
@@ -54,3 +57,10 @@ streak_milestone_template = "${streak_count}-Day Streak! ${pax_tag} is on fire w
 # ${ao_count_ord}: The ordinal version of the AO count (i.e. 9th)
 # ${ao}: The AO that they just hit to get all the AOs
 all_aos_milestone_template = f3_region + " Traveler! ${pax_tag} has now posted at all ${ao_count} AOs in the region."
+
+# Available tags for Max Attendance:
+# ${ao}: The AO with the max attendance record for the day
+# ${q}: The name of the Q. This will not be tagged.
+# ${q_tag}: A tag for the slack post that will be a link to the Q (i.e. @Ethanol)
+# ${pax_count}: The number of PAX at the workout
+max_attendance_milestone_template = "New Attendance Record! ${q_tag} just Q'ed a workout attendance record for " + f3_region + " with @{pax_count} PAX at #{ao}"

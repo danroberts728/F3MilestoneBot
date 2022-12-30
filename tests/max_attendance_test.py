@@ -5,6 +5,8 @@ from freezegun import freeze_time
 
 import MilestoneTrigger.max_attendance_milestone as milestones
 
+template ="Testing ao ${ao} q ${q} q_tag ${q_tag} pax_count ${pax_count}"
+
 class TestAttendance(unittest.TestCase):
     @freeze_time('2022-12-19 14:00:00')
     def test_nottoday(self):
@@ -14,7 +16,7 @@ class TestAttendance(unittest.TestCase):
                 ('2022-01-28', 'ao-slagheap', 'Hammy', '43', 'U02B5JT7R53')
             ]
 
-            result = milestones.get(mock_conn, 'US/Central')
+            result = milestones.get(mock_conn, 'US/Central', template)
 
             assert len(result) == 0
 
@@ -27,9 +29,13 @@ class TestAttendance(unittest.TestCase):
                 ('2022-12-10', 'ao-houseofpaine', 'Breach', '47', 'U02B5JT7R43')
             ]
 
-            result = milestones.get(mock_conn, 'US/Central')
+            result = milestones.get(mock_conn, 'US/Central', template)
 
             assert len(result) == 1
+            assert 'ao-houseofpaine' in result[0]
+            assert 'Breach' in result[0]
+            assert '47' in result[0]
+            assert 'U02B5JT7R43' in result [0]
 
     @freeze_time('2022-12-19 14:00:00')
     def test_tie(self):
@@ -40,6 +46,6 @@ class TestAttendance(unittest.TestCase):
                 ('2022-12-19', 'ao-houseofpaine', 'Breach', '43', 'U02B5JT7R43')
             ]
 
-            result = milestones.get(mock_conn, 'US/Central')
+            result = milestones.get(mock_conn, 'US/Central', template)
 
             assert len(result) == 0

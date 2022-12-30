@@ -49,38 +49,38 @@ def main(mytimer: func.TimerRequest) -> None:
                 annual_stats = wsm.get_annual_max_avg(connection, config.local_timezone)
                 weekly_stats_posts = wsm.get(connection, config.local_timezone, annual_stats, config.weekly_stats_milestone_template)
                 posts += weekly_stats_posts
-                logging.info(f"Weekly Stats milestone generated ${len(weekly_stats_posts)} Slack posts.")
+                logging.info(f"Weekly Stats milestone generated {len(weekly_stats_posts)} Slack posts.")
 
             # Total Posts
             if config.use_total_posts_milestone:
                 for num in config.total_post_milestone_numbers:
                     total_posts_posts = tpm.get(connection, num, config.local_timezone, config.total_post_milestone_template)
                     posts += total_posts_posts
-                    logging.info(f"Total Posts milestone generated ${len(total_posts_posts)} Slack posts.")
+                    logging.info(f"Total Posts milestone generated {len(total_posts_posts)} Slack posts.")
 
             # Streaks
             if config.use_streak_milestone:
                 streak_posts = sm.get(connection, config.streak_divisor, config.local_timezone, config.sixpack_milestone_template)
                 posts += streak_posts
-                logging.info(f"Streaks Milestone generated ${len(streak_posts)} Slack posts.")
+                logging.info(f"Streaks Milestone generated {len(streak_posts)} Slack posts.")
 
             # 6-Pack Alert
             if config.use_six_pack_milestones:
                 sixpack_posts = spm.get(connection, config.local_timezone, config.sixpack_milestone_template)
                 posts += sixpack_posts
-                logging.info(f"Sixpack Milestone generated ${len(sixpack_posts)} Slack posts.")
+                logging.info(f"Sixpack Milestone generated {len(sixpack_posts)} Slack posts.")
 
             # All AOs
             if config.use_all_aos_milestone:
                 all_aos_posts = aom.get(connection, config.local_timezone, config.all_aos_milestone_template)
                 posts += all_aos_posts
-                logging.info(f"All AOs Milestone generated ${len(all_aos_posts)} Slack posts.")
+                logging.info(f"All AOs Milestone generated {len(all_aos_posts)} Slack posts.")
             
             # Max Attendance
             if config.use_max_attendance_milestone:
                 max_att_posts = mam.get(connection, config.local_timezone, config.max_attendance_milestone_template)
                 posts += max_att_posts
-                logging.info(f"Max Attendance Milestone generated ${len(max_att_posts)} Slack posts.")
+                logging.info(f"Max Attendance Milestone generated {len(max_att_posts)} Slack posts.")
 
     except Exception as err:
         logging.error("Failure: " + str(err))

@@ -13,6 +13,7 @@ import streak_milestones as sm
 import sixpack_milestones as spm
 import all_aos_milestone as aom
 import max_attendance_milestone as mam
+import weekly_stats_milestone as wsm
 
 import azure.functions as func
 
@@ -42,6 +43,11 @@ def main(mytimer: func.TimerRequest) -> None:
             user=db_username,
             password=db_password
         ) as connection:
+
+            # Weekly Stats
+            if config.use_weekly_stats_milestone:
+                annual_stats = wsm.get_annual_max_avg(connection, config.local_timezone)
+                posts += wsm.get(connection, config.local_timezone, annual_stats, config.weekly_stats_milestone_template)
 
             # Total Posts
             if config.use_total_posts_milestone:

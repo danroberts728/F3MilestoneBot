@@ -23,10 +23,13 @@ use_all_aos_milestone = True
 ### Max Attendence Milestone Settings
 use_max_attendance_milestone = True
 
+### Weekly Stats Milestone Settings
+use_weekly_stats_milestone = True
+
 ### Timezone Settings
 local_timezone = "US/Central"
 
-minutes_between_posts = 60
+minutes_between_posts = 15
 
 ### Post Templates
 
@@ -79,3 +82,27 @@ max_attendance_milestone_template = "New Attendance Record! ${q_tag} just Q'ed a
 # ${posts_weekly_avg}: The number of posts per week on average this year (i.e. 3.4)
 # ${current_year}: The current year
 annual_post_milestone_template = "${posts_num} posts in ${current_year}! ${pax_tag} just made his ${posts_ord} post to " + f3_region + " this year."
+
+# Available tags for Weekly Stats:
+# ${week_ending}: The Saturday ending the week in <day>, <month> <date>, <year> format (i.e. Saturday, December 24, 2022)
+# ${this_week_count}: Number of posts this week (should be sum of the day counts below)
+# ${mon_count}: The post count for Monday
+# ${tue_count}: The post count for Tuesday
+# ${wed_count}: The post count for Wednesday
+# ${thu_count}: The post count for Thursday
+# ${fri_count}: The post count for Friday
+# ${sat_count}: The post count for Saturday
+# ${max_week_count}: The max weekly post count for the current year
+# ${avg_week_count}: The average weekly post count for the current year
+weekly_stats_milestone_template = """Posting summary for the week ending ${week_ending}:
+
+Monday: ${mon_count}
+Tuesday: ${tue_count}
+Wednesday: ${wed_count}
+Thursday: ${thu_count}
+Friday: ${fri_count}
+Saturday: ${sat_count}
+*Total: ${this_week_count}*
+
+Biggest count this year: ${max_week_count}
+Average count this year: ${avg_week_count}"""

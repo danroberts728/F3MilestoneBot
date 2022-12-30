@@ -27,6 +27,7 @@ class TestSixPackIntegration(unittest.TestCase):
     @freeze_time('2022-01-28 14:00:00')
     def test_max_attedance(self):
         with mysql.connector.connect(
+            pool_name="F3MilestoneBotPool",
             host=db_host,
             database=db_database,
             user=db_username,

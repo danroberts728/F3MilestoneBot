@@ -26,6 +26,7 @@ class TestWeeklyStatsIntegration(unittest.TestCase):
     @freeze_time('2022-12-24 14:00:00')
     def test_weekly_stats_milestone(self):
         with mysql.connector.connect(
+            pool_name="F3MilestoneBotPool",
             host=db_host,
             database=db_database,
             user=db_username,

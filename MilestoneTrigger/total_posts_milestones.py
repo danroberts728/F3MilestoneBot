@@ -5,18 +5,19 @@ import logging
 import string
 
 def get(connection, number, local_timezone, post_template):
-    sql = f"""  SELECT 
-                    av.pax, 
-                    DATE_FORMAT( MAX(av.date), '%Y-%m-%d' ) AS last_post,
-                    COUNT(av.pax) AS total_posts,
-                    ROW_NUMBER() OVER ( ORDER BY COUNT(av.pax) DESC ) AS rnk,
-                    u.user_id
-                FROM attendance_view av 
-                INNER JOIN users u 
-                	ON u.user_name = av.pax
-                GROUP BY av.pax 
-                HAVING total_posts >= {number}
-                ORDER BY COUNT(av.pax) DESC"""
+    sql = f"""
+    SELECT 
+        u.user_name AS pax,
+        DATE_FORMAT(MAX(ba.date), '%Y-%m-%d') AS last_post,
+        COUNT(u.user_name) AS total_posts,
+        ROW_NUMBER() OVER ( ORDER BY COUNT(u.user_name) DESC) AS rnk,
+        u.user_id
+    FROM bd_attendance ba 
+    INNER JOIN users u 
+        ON u.user_id = ba.user_id 
+    GROUP BY u.user_name
+    HAVING total_posts >= {number}
+    ORDER BY COUNT(u.user_name) DESC"""
 
     try:
         slack_posts = []

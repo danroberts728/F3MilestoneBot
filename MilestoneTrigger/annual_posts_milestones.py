@@ -6,25 +6,25 @@ import string
 
 def get(connection, number, local_timezone, post_template, disable_annual_posts_for_first_year = True):
     sql = f"""  
-        SELECT 
-            av.pax, 
-            COUNT(av.pax) AS posts, 
-            COUNT(av.pax)/CEILING(DAYOFYEAR(SYSDATE())/7) AS weekly_avg,
-            DATE_FORMAT( MAX(av.date), '%Y-%m-%d') AS last_post,
+        SELECT
+            u.user_name,
+            COUNT(ba.user_id) AS posts,
+            COUNT(ba.user_id)/CEILING(DAYOFYEAR(SYSDATE())/7) AS weekly_avg,
+            DATE_FORMAT( MAX(ba.date), '%Y-%m-%d' ) AS last_post,
             first_posts.year AS first_post_year,
-            u.user_id 
-        FROM attendance_view av 
-        INNER JOIN users u
-            ON av.pax = u.user_name
+            u.user_id
+        FROM bd_attendance ba 
+        INNER JOIN users u 
+            ON u.user_id  = ba.user_id
         INNER JOIN (
-        	SELECT ba.user_id, DATE_FORMAT(MIN(ba.date), '%Y') AS year
-        	FROM bd_attendance ba
-        	GROUP BY ba.user_id
-        ) first_posts ON first_posts.user_id = u.user_id
-        WHERE av.date BETWEEN DATE_FORMAT(NOW(), '%Y-01-01') AND NOW()
-        GROUP BY pax
+                    SELECT ba2.user_id, DATE_FORMAT(MIN(ba2.date), '%Y') AS year
+                    FROM bd_attendance ba2
+                    GROUP BY ba2.user_id
+                ) first_posts ON first_posts.user_id = u.user_id
+        WHERE ba.date BETWEEN DATE_FORMAT(NOW(), '%Y-01-01') AND NOW()
+        GROUP BY u.user_name 
         HAVING posts >= {number}
-        ORDER BY COUNT(pax) DESC;"""
+        ORDER BY COUNT(ba.user_id) DESC"""
 
     try:
         slack_posts = []

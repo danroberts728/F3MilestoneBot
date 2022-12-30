@@ -5,6 +5,11 @@ f3_region = "F3 Beast"
 use_total_posts_milestone = True
 total_post_milestone_numbers = [25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
 
+### Annual Posts Milestone Settings
+use_annual_posts_milestone = True
+disable_annual_posts_for_first_year = True
+annual_post_milestone_numbers = [50, 100, 150, 200, 223]
+
 ### Streak Milestone Settings
 use_streak_milestone = True
 streak_divisor = 10
@@ -64,3 +69,13 @@ all_aos_milestone_template = f3_region + " Traveler! ${pax_tag} has now posted a
 # ${q_tag}: A tag for the slack post that will be a link to the Q (i.e. @Ethanol)
 # ${pax_count}: The number of PAX at the workout
 max_attendance_milestone_template = "New Attendance Record! ${q_tag} just Q'ed a workout attendance record for " + f3_region + " with @{pax_count} PAX at #{ao}"
+
+# Available tags for Annual Posts:
+# ${pax}: The name of the PAX. This will not be tagged
+# ${last_post}: The date of the last PAX's post, which should always be the current date, in YYYY-MM-DD format
+# ${posts_num}: The number of posts for the PAX in the current year (i.e. 50)
+# ${pax_tag}: A tag for the post that will be a link to the user (i.e. @Ethanol)
+# ${posts_ord}: An ordinal version of the number of posts for the PAX in the current year (i.e. 50th)
+# ${posts_weekly_avg}: The number of posts per week on average this year (i.e. 3.4)
+# ${current_year}: The current year
+annual_post_milestone_template = "${posts_num} posts in ${current_year}! ${pax_tag} just made his ${posts_ord} post to " + f3_region + " this year."

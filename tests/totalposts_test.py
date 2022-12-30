@@ -4,6 +4,8 @@ import datetime, pytz
 
 import MilestoneTrigger.total_posts_milestones as milestones
 
+template ="Testing Name ${pax} last_post ${last_post} rank_num ${rank_num} pax_id ${pax_id} pax_tag ${pax_tag} posts_ord ${posts_ord} rank_ord ${rank_ord}"
+
 today = datetime.datetime.utcnow().replace(
             tzinfo=datetime.timezone.utc).astimezone(
                 tz=pytz.timezone("US/Central")).strftime('%Y-%m-%d')
@@ -14,7 +16,7 @@ class TestTotalPosts(unittest.TestCase):
             mock_conn.cursor = mock.MagicMock()
             mock_conn.cursor.fetchall = []
 
-            result = milestones.get(mock_conn, 50, 'US/Central')
+            result = milestones.get(mock_conn, 50, 'US/Central', template)
 
             assert len(result) == 0
 
@@ -26,7 +28,7 @@ class TestTotalPosts(unittest.TestCase):
                 ('Breach (Aaron Smith)', today, 50, 1, 'U257')
             ]
 
-            result = milestones.get(mock_conn, 50, 'US/Central')
+            result = milestones.get(mock_conn, 50, 'US/Central', template)
 
             assert len(result) == 1
             assert "<@U257>" in result[0] 
@@ -45,7 +47,7 @@ class TestTotalPosts(unittest.TestCase):
                 ('Breach (Aaron Smith)', today, 50, 5, 'U257')
             ]
 
-            result = milestones.get(mock_conn, 50, 'US/Central')
+            result = milestones.get(mock_conn, 50, 'US/Central', template)
 
             assert len(result) == 2
 

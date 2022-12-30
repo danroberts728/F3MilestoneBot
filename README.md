@@ -1,4 +1,4 @@
-# F3MilestoneBot
+# F3MilestoneBot [![Dev Tests](https://github.com/danroberts728/F3MilestoneBot/actions/workflows/dev_tests.yml/badge.svg)](https://github.com/danroberts728/F3MilestoneBot/actions/workflows/dev_tests.yml)
 
 The F3MilestoneBot is an Azure Function that reads an F3 PAXMiner database and posts certain PAX milestones. There are currently three types of milestones:
 
@@ -20,7 +20,7 @@ This recognizes PAX that have posted 6 days in a row in a given week. It is only
 This recognizes a PAX that has posted at every AO in the region.
 
 #### _Q Traveler Milestones_
-THis recognizes a PAX that has Q'ed at every AO in the region.
+This recognizes a PAX that has Q'ed at every AO in the region.
 
 #### _Biggest Workout Milestones_
 This posts when a workout that day is the largest workout in the history of the region.
@@ -36,7 +36,7 @@ There is no persistence of data, which creates limitations. The main limitation 
 
 In other words, all the day's backblasts must be posted before the app is run in order for it to post any milestones that were reached that day. The one exception to this is for the Six Pack milestone. For the Six Pack mlestone, all the previous week's backblasts must be posted before the app is run on the following Sunday.
 
-To install:
+## To install:
 - Rename config_sample.py to config.py
 - Update the values in the config file as needed (below will help guide you)
 

@@ -2,8 +2,9 @@ import datetime
 import pytz
 import common
 import logging
+import string
 
-def get(connection, number, local_timezone):
+def get(connection, number, local_timezone, post_template):
     sql = f"""  SELECT 
                     av.pax, 
                     DATE_FORMAT( MAX(av.date), '%Y-%m-%d' ) AS last_post,
@@ -33,10 +34,20 @@ def get(connection, number, local_timezone):
         eligible_rows = list(filter(lambda r: r[2] == number and r[1] == today, results))
 
         for row in eligible_rows:
-            ordinal_posts = common.make_ordinal(row[2])
-            ordinal_rank = common.make_ordinal(row[3])
-            slack_posts.append(
-                f"{number} posts! Congratulations to <@{row[4]}> for making his {ordinal_posts} post to F3 Beast. He is the {ordinal_rank} PAX to reach this milestone.")
+            template_substitutes = dict(
+                pax = row[0],
+                last_post = row[1],
+                posts_num = row[2],
+                rank_num = row[3],
+                pax_id = row[4],
+                pax_tag = f"<@{row[4]}>",
+                posts_ord = common.make_ordinal(row[2]),
+                rank_ord = common.make_ordinal(row[3])
+            )
+            
+
+            post = string.Template(post_template).substitute(template_substitutes)
+            slack_posts.append(post)
 
         return list(slack_posts)
     except Exception as e:

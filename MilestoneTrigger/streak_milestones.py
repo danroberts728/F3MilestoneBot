@@ -2,8 +2,9 @@ import datetime
 import logging
 import pytz
 import common
+import string
 
-def get(connection, divisor, local_timezone):
+def get(connection, divisor, local_timezone, post_template):
     sql = f"""           
         WITH workouts AS (
             SELECT 
@@ -66,8 +67,14 @@ def get(connection, divisor, local_timezone):
         retval = []
 
         for row in eligible_rows:
-            ordinal_streak = common.make_ordinal(row[2])
-            retval.append(f"{row[2]}-Day Streak! <@{row[4]}> is on fire with his {ordinal_streak} post in a row.")
+            template_substitutes = dict(
+                pax = row[0],
+                streak_count = row[2],
+                streak_count_ord = common.make_ordinal(row[2]),
+                last_post = row[3],
+                pax_tag = f"<@{row[4]}>",      
+            )
+            retval.append(string.Template(post_template).substitute(template_substitutes))
 
         return retval
     except Exception as e:

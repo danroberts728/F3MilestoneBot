@@ -1,13 +1,13 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
-name: Python application
+name: Dev Tests
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "develop" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "develop" ]
 
 permissions:
   contents: read
@@ -35,5 +35,12 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
+      env: 
+        F3M_PAXMINER_DB_HOST: ${{ secrets.F3M_PAXMINER_DB_HOST }}
+        F3M_PAXMINER_DB_DATABASE: ${{ secrets.F3M_PAXMINER_DB_DATABASE }}
+        F3M_PAXMINER_DB_USERNAME: ${{ secrets.F3M_PAXMINER_DB_USERNAME }}
+        F3M_PAXMINER_DB_PASSWORD: ${{ secrets.F3M_PAXMINER_DB_PASSWORD }}
+        F3M_SLACK_API_TOKEN: ${{ secrets.F3M_SLACK_API_TOKEN }}
+        F3M_SLACK_POST_CHANNEL_ID: ${{ secrets.F3M_SLACK_POST_CHANNEL_ID }}
       run: |
         pytest

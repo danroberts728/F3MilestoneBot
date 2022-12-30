@@ -12,6 +12,7 @@ import total_posts_milestones as tpm
 import streak_milestones as sm
 import sixpack_milestones as spm
 import all_aos_milestone as aom
+import max_attendance_milestone as mam
 
 import azure.functions as func
 
@@ -58,6 +59,10 @@ def main(mytimer: func.TimerRequest) -> None:
             # All AOs
             if config.use_all_aos_milestone:
                 posts += aom.get(connection, config.local_timezone, config.all_aos_milestone_template)
+            
+            # Max Attendance
+            if config.use_max_attendance_milestone:
+                posts += mam.get(connection, config.local_timezone, config.max_attendance_milestone_template)
 
     except Exception as err:
         logging.error("Failure: " + str(err))

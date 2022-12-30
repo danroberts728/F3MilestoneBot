@@ -38,6 +38,8 @@ This is a weekly post that gives the stats for the week and compares it to the y
 In the event that there are multiple milestones in a single day, the app will schedule subsequent posts. The duration between posts is configurable.
 
 ## Known issues
+The database queries rely on the views present in the default PAXMiner schema. Because of this, if a user_name (PAX name in Slack) has a duplicate, it will cause duplication issues with some milestones. To prevent this from causing issues, every PAX should have a unique user_name in Slack.
+
 There is no persistence of data, which creates limitations. The main limitation is that the app does not know if it has already posted a milestone. In order to prevent duplicate posts, the app only runs once per day. This creates an issue - if the app is run before all backblasts are posted for the day, it will not "know" if a certain milestone has been met for that day. Then the next day, it will assume it was posted previously and not post it. 
 
 In other words, all the day's backblasts must be posted before the app is run in order for it to post any milestones that were reached that day. The one exception to this is for the Six Pack milestone. For the Six Pack mlestone, all the previous week's backblasts must be posted before the app is run on the following Sunday.

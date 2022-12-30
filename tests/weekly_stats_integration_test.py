@@ -5,7 +5,7 @@ from freezegun import freeze_time
 
 import MilestoneTrigger.common as common
 import MilestoneTrigger.config as config
-import MilestoneTrigger.max_attendance_milestone as mam
+import MilestoneTrigger.weekly_stats_milestone as wsm
 
 import os
 from dotenv import load_dotenv
@@ -19,13 +19,12 @@ db_password = os.environ['F3M_PAXMINER_DB_PASSWORD']
 slack_api_token = os.environ['F3M_SLACK_API_TOKEN']
 post_channel_id = os.environ['F3M_SLACK_POST_CHANNEL_ID']
 
-class TestSixPackIntegration(unittest.TestCase):
+class TestWeeklyStatsIntegration(unittest.TestCase):
 
-    # This is a bit of a hack that will fail at some point,
-    # but we have a max attendance record with Hammy that has stood
-    # for a while
-    @freeze_time('2022-01-28 14:00:00')
-    def test_max_attedance(self):
+    # This is a bit of a hack because we know
+    # our database state at this time
+    @freeze_time('2022-12-24 14:00:00')
+    def test_weekly_stats_milestone(self):
         with mysql.connector.connect(
             pool_name="F3MilestoneBotPool",
             host=db_host,
@@ -33,11 +32,19 @@ class TestSixPackIntegration(unittest.TestCase):
             user=db_username,
             password=db_password
         ) as connection:
-            posts = mam.get(connection, 'US/Central', config.max_attendance_milestone_template)
+            stats = wsm.get_annual_max_avg(connection, "US/Central")
+            posts = wsm.get(connection, "US/Central", stats, config.weekly_stats_milestone_template)
 
             assert len(posts) == 1
-            for p in posts:
-                assert 'U02B5JT7R53' in p
+            p = posts[0]
+            assert "week ending Saturday, December 24, 2022" in p
+            assert "Monday: 24" in p
+            assert "Tuesday: 13" in p
+            assert "Wednesday: 22" in p
+            assert "Thursday: 15" in p
+            assert "Friday: 23" in p
+            assert "Saturday: 9" in p
+            assert "Total: 106" in p
         
 if __name__ == 'main':
     unittest.main()

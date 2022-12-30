@@ -25,6 +25,7 @@ class TestAnnualPostsIntegration(unittest.TestCase):
 
     def test_annualpost_milestone(self):
         with mysql.connector.connect(
+            pool_name="F3MilestoneBotPool",
             host=db_host,
             database=db_database,
             user=db_username,

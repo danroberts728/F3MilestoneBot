@@ -2,37 +2,37 @@
 
 The F3MilestoneBot is an Azure Function that reads an F3 PAXMiner database and posts certain PAX milestones. There are currently three types of milestones:
 
+#### Weekly Stats Milestone
+This posts a weekly message with the daily post statistics for the region. By configuration, it can also include the weekly average and maximum posting counts for the current year.
+
 #### Total Posts Milestones
 This recongizes PAX that have reached a certain number of total posts. The number of posts are configurable. For example, the total posts can be 10 and 100. Once any PAX reaches that number of posts, the app will post a message stating: "10 posts! Congratulations to @Crafty for making his 10th post to F3 Beast. He is the 81st PAX to reach this milestone."
 
-The text of the post in this milestone and others is currently hard-coded.
+#### Annual Posts Milestones
+This is similar to the Total Posts Milestones, but it is limited to the current year. By configuration, you can disable posting this milestone for PAX in their first year with the region, to prevent duplication.
 
 #### Streak Milestones
 This recognizes PAX that have posted a certain number of days in a row. You can configure the divisor. For example, the divisor can be set to 10. Once any PAX reaches his 10th, 20th, 30th etc. post in a row, the app will post a message stating: "20-Day Streak! @Crafty is on fire with his 20th post in a row."
 
 The app will always skip Sundays and any day without a backblast posted when determining streaks.
 
+#### All AOs Milestone
+This recognizes PAX that have poste to all AOs in the region (except #ao-downrange). 
+
+#### Max Attendance Milestone
+This recognizes any workout for the day that has the highest number of PAX.
+
+#### 
+
 #### Six Pack Milestones
 This recognizes PAX that have posted 6 days in a row in a given week. It is only posted on Sundays for the previous week. Unlike the other milestones, this is a group post on slack. For example, it may read: "6-Pack Alert! T-Claps to @Crafty, @Eskimo and @Cheerio for posting every day last week."
 
 ### Potential Future Milestones
-#### _World Traveler Milestone_
-This recognizes a PAX that has posted at every AO in the region.
-
 #### _Q Traveler Milestones_
 This recognizes a PAX that has Q'ed at every AO in the region.
 
-#### _Max Attendance Milestone_
-This posts when a workout that day is the largest workout in the history of the region.
-
 #### _Total Men Led Milestones_
 This posts when a PAX has led X number of PAX as the Q of a workout. The value of X is configurable. For example, the total men led can be 100 and 500. Once any PAX reaches that number of men led, the app will post a message.
-
-#### _Annual Posts Milestones_
-This recongizes PAX that have reached a certain number of posts in the current year. The number of posts are configurable. There is also a recommended configuration to turn off the milestone for PAX that are in their first year to prevent duplicates.
-
-#### _Weekly Stats_ 
-This is a weekly post that gives the stats for the week and compares it to the year. It can show the total posts, the breakdown by day, the average weekly posts for the year, the max posts per year, and an indication of whether the current week is a new record.
 
 ## Multiple milestones
 In the event that there are multiple milestones in a single day, the app will schedule subsequent posts. The duration between posts is configurable.

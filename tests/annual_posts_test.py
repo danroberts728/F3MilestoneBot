@@ -27,7 +27,7 @@ class TestAnnualPosts(unittest.TestCase):
                 ('Spit Valve', 200, 4.48, '2022-12-04', '2022', 'U257')
             ]
 
-            result = milestones.get(mock_conn, 200, 'US/Central', template, True)
+            result = milestones.get(mock_conn, 200, 'US/Central', template, False)
 
             assert len(result) == 1
             assert "pax Spit Valve" in result[0]
@@ -51,7 +51,7 @@ class TestAnnualPosts(unittest.TestCase):
                 ('Gipper', 187, 4.5, '2022-12-04', '2022', 'U5')
             ]
 
-            result = milestones.get(mock_conn, 200, "US/Central", template, True)
+            result = milestones.get(mock_conn, 200, "US/Central", template, False)
 
             assert len(result) == 2
 
@@ -81,8 +81,8 @@ class TestAnnualPosts(unittest.TestCase):
             mock_conn.cursor.return_value = cursor
             cursor.fetchall.return_value = [
                 ('Spit Valve', 250, 4.1, '2022-12-04', '2022', 'U1'),
-                ('Crafty', 200, 4.2, '2022-12-04', '2021', 'U2'),
-                ('Ethanol', 200, 4.3, '2022-12-04', '2022', 'U3'), # Match
+                ('Crafty', 200, 4.2, '2022-12-04', '2022', 'U2'),
+                ('Ethanol', 200, 4.3, '2022-12-04', '2021', 'U3'), # Match
                 ('Breach', 200, 4.4, '2022-12-03', '2022', 'U4'),
                 ('Gipper', 187, 4.5, '2022-12-04', '2022', 'U5')
             ]

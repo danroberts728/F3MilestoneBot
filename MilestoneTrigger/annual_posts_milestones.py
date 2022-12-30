@@ -45,7 +45,7 @@ def get(connection, number, local_timezone, post_template, disable_annual_posts_
 
         eligible_rows = list(filter(lambda r: r[1] == number and r[3] == today, results))
         if disable_annual_posts_for_first_year:
-            eligible_rows = list(filter(lambda r: r[4] == current_year, eligible_rows))
+            eligible_rows = list(filter(lambda r: r[4] != current_year, eligible_rows))
 
         for row in eligible_rows:
             template_substitutes = dict(

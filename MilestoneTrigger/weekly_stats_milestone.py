@@ -83,7 +83,7 @@ def get_annual_max_avg(connection, local_timezone):
         FROM attendance_view av
         WHERE av.date BETWEEN DATE_FORMAT('{date_now}', '%Y-01-01') AND '{date_now}'
         GROUP BY WEEK(av.date, 3)
-        HAVING wk < WEEK('{date_now}', 3) 
+        HAVING wk <= WEEK('{date_now}', 3) 
         ORDER BY WEEK(av.date, 3)
     """
 

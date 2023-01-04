@@ -14,6 +14,7 @@ import sixpack_milestones as spm
 import all_aos_milestone as aom
 import max_attendance_milestone as mam
 import weekly_stats_milestone as wsm
+import annual_posts_milestones as apm
 
 import azure.functions as func
 
@@ -50,6 +51,13 @@ def main(mytimer: func.TimerRequest) -> None:
                 weekly_stats_posts = wsm.get(connection, config.local_timezone, annual_stats, config.weekly_stats_milestone_template)
                 posts += weekly_stats_posts
                 logging.info(f"Weekly Stats milestone generated {len(weekly_stats_posts)} Slack posts.")
+
+            # Annual Posts
+            if config.use_annual_posts_milestone:
+                for num in config.annual_post_milestone_numbers:
+                    annual_posts_posts = apm.get(connection, num, config.local_timezone,config.annual_post_milestone_template, True)
+                    posts += annual_posts_posts
+                    logging.info(f"Annual Posts milestone generated {len(annual_posts_posts)} Slack posts.")
 
             # Total Posts
             if config.use_total_posts_milestone:

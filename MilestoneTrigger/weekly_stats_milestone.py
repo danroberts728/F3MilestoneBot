@@ -9,14 +9,14 @@ def get(connection, local_timezone, annual_stats, post_template):
                 tz=pytz.timezone(local_timezone)).strftime('%Y-%m-%d')
     sql = f"""
     SELECT 
-        DATE_FORMAT(av.date,'%Y-%m-%d') AS date, 
-        DATE_FORMAT(av.date,'%W') as day,
-        COUNT(av.pax) AS cnt
-    FROM attendance_view av
-    WHERE av.date 
+        DATE_FORMAT(bi.date,'%Y-%m-%d') AS date, 
+        DATE_FORMAT(bi.date,'%W') as day,
+        SUM(bi.pax_count) AS cnt
+    FROM beatdown_info bi
+    WHERE bi.date 
         BETWEEN DATE_ADD('{date_now}', INTERVAL -6 DAY) AND '{date_now}'
-    GROUP BY av.date
-    ORDER BY av.date;"""
+    GROUP BY bi.date
+    ORDER BY bi.date;"""
     
     try:
         today = datetime.datetime.utcnow().replace(
@@ -79,12 +79,16 @@ def get_annual_max_avg(connection, local_timezone):
             tzinfo=datetime.timezone.utc).astimezone(
                 tz=pytz.timezone(local_timezone)).strftime('%Y-%m-%d')
     sql_stats = f"""   
-        SELECT DATE_FORMAT(date, '%Y-%m-%d'), WEEK(av.date, 3) AS wk, COUNT(av.pax) AS count
-        FROM attendance_view av
-        WHERE av.date BETWEEN DATE_FORMAT('{date_now}', '%Y-01-01') AND '{date_now}'
-        GROUP BY WEEK(av.date, 3)
+        SELECT 
+            DATE_FORMAT(bi.date, '%Y-%m-%d'), 
+            WEEK(bi.date, 3) AS wk, 
+            SUM(bi.pax_count)
+        FROM beatdown_info bi
+        WHERE bi.date 
+            BETWEEN DATE_FORMAT('{date_now}', '%Y-01-01') AND '{date_now}'
+        GROUP BY WEEK(bi.date, 3)
         HAVING wk <= WEEK('{date_now}', 3) 
-        ORDER BY WEEK(av.date, 3)
+        ORDER BY WEEK(bi.date, 3);
     """
 
     try:

@@ -68,7 +68,7 @@ def main(mytimer: func.TimerRequest) -> None:
 
             # Streaks
             if config.use_streak_milestone:
-                streak_posts = sm.get(connection, config.streak_divisor, config.local_timezone, config.sixpack_milestone_template)
+                streak_posts = sm.get(connection, config.streak_divisor, config.local_timezone, config.streak_milestone_template)
                 posts += streak_posts
                 logging.info(f"Streaks Milestone generated {len(streak_posts)} Slack posts.")
 

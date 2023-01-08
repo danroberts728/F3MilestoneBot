@@ -8,27 +8,26 @@ def get(connection, local_timezone, post_template):
             tzinfo=datetime.timezone.utc).astimezone(
                 tz=pytz.timezone(local_timezone)).strftime('%Y-%m-%d')
     sql = f"""   
-        SELECT DISTINCT
-            av.pax, u.user_id, MIN(av.date) as start, MAX(av.date) as stop, COUNT(av.pax) as streak
-        FROM attendance_view av 
-        INNER JOIN users u 
-            ON u.user_name = av.pax
-        INNER JOIN bd_attendance ba 
-            ON u.user_id = ba.user_id
-            AND av.date = ba.date
-        WHERE av.date IN (
-            SELECT DISTINCT bi.date
-                FROM beatdown_info bi 
-                WHERE bi.date BETWEEN DATE_ADD('{date_now}', INTERVAL -6 DAY)
-                        AND DATE_ADD('{date_now}', INTERVAL -1 DAY)
-                    AND DAYOFWEEK(bi.date) != 1
+        WITH last_week AS (
+            SELECT DISTINCT
+                ba.user_id, ba.date
+            FROM bd_attendance ba 
+            WHERE ba.date BETWEEN DATE_ADD('{date_now}', INTERVAL -6 DAY)
+                AND DATE_ADD('{date_now}', INTERVAL -1 DAY)
+            ORDER BY ba.user_id, ba.date
         )
-        GROUP BY av.pax, u.user_id
-        HAVING streak >= 6 
-        	AND DAYOFWEEK(start) = 2 
-        	AND DAYOFWEEK(stop) = 7
-        ORDER BY COUNT(av.pax) DESC
-    """
+        SELECT 
+            u.user_name AS pax,
+            lw.user_id,
+            MIN(lw.date) AS start,
+            MAX(lw.date) AS stop,
+            COUNT(lw.user_id) AS streak
+        FROM last_week lw
+        INNER JOIN users u
+            ON u.user_id = lw.user_id
+        GROUP BY lw.user_id
+        HAVING streak >= 6
+        ORDER BY COUNT(lw.user_id) DESC"""
 
     all_tags = []
 

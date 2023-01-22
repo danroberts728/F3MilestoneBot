@@ -13,8 +13,10 @@ def get(connection, local_timezone, annual_stats, post_template):
         DATE_FORMAT(bi.date,'%W') as day,
         SUM(bi.pax_count) AS cnt
     FROM beatdown_info bi
-    WHERE bi.date 
-        BETWEEN DATE_ADD('{date_now}', INTERVAL -6 DAY) AND '{date_now}'
+    WHERE bi.ao != 'ao-downrange' 
+        AND bi.date 
+            BETWEEN DATE_ADD('{date_now}', INTERVAL -6 DAY) AND '{date_now}'
+
     GROUP BY bi.date
     ORDER BY bi.date;"""
     

@@ -38,13 +38,13 @@ class TestWeeklyStatsIntegration(unittest.TestCase):
             assert len(posts) == 1
             p = posts[0]
             assert "week ending Saturday, December 24, 2022" in p
-            assert "Monday: 24" in p
+            assert "Monday: 21" in p
             assert "Tuesday: 13" in p
             assert "Wednesday: 22" in p
             assert "Thursday: 15" in p
             assert "Friday: 23" in p
             assert "Saturday: 9" in p
-            assert "Total: 106" in p
+            assert "Total: 103" in p
         
 if __name__ == 'main':
     unittest.main()

@@ -41,7 +41,7 @@ minutes_between_posts = 15
 # ${post_ord}: An ordinal version of the number of posts for the PAX (i.e. 50th)
 # ${rank_num}: The rank of the PAX reaching this milestone. (i.e. 39)
 # ${rank_ord}: The ordinal version of the rank fo the PAX reaching this milestone (i.e. 39th)
-total_post_milestone_template = "${posts_num} posts! Congratulations to ${pax_tag} for making his ${posts_ord} post to " + f3_region + ". He is the ${rank_ord} PAX to reach this milestone."
+total_post_milestone_template = "${posts_num} lifetime posts! Congratulations to ${pax_tag} for making his ${posts_ord} post. He is the ${rank_ord} PAX to reach this milestone."
 
 # Available tags for Six Pack:
 # ${milestone_count}: The number of PAX who reached the milestone this week (i.e. 3)
@@ -94,7 +94,7 @@ annual_post_milestone_template = "${posts_num} posts in ${current_year}! ${pax_t
 # ${sat_count}: The post count for Saturday
 # ${max_week_count}: The max weekly post count for the current year
 # ${avg_week_count}: The average weekly post count for the current year
-weekly_stats_milestone_template = """Posting summary for the week ending ${week_ending}:
+weekly_stats_milestone_template = f3_region + """ posting summary for the week ending ${week_ending}:
 
 Monday: ${mon_count}
 Tuesday: ${tue_count}

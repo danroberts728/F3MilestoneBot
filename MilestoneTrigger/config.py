@@ -7,7 +7,7 @@ total_post_milestone_numbers = [25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 
 
 ### Annual Posts Milestone Settings
 use_annual_posts_milestone = True
-disable_annual_posts_for_first_year = True
+disable_annual_posts_for_first_year = False
 annual_post_milestone_numbers = [25, 50, 100, 150, 200, 223, 250, 300, 325, 350]
 
 ### Streak Milestone Settings
@@ -22,6 +22,10 @@ use_all_aos_milestone = True
 
 ### Max Attendence Milestone Settings
 use_max_attendance_milestone = True
+
+### Annual Qs Milestone Settings
+use_annual_qs_milestone = True
+annual_qs_milestone_numbers = [6, 12, 23, 24, 52]
 
 ### Weekly Stats Milestone Settings
 use_weekly_stats_milestone = True
@@ -83,6 +87,18 @@ max_attendance_milestone_template = "New Attendance Record! ${q_tag} just Q'ed a
 # ${posts_weekly_avg}: The number of posts per week on average this year (i.e. 3.4)
 # ${current_year}: The current year
 annual_post_milestone_template = "${posts_num} posts in ${current_year}! ${pax_tag} just made his ${posts_ord} post to " + f3_region + " this year."
+
+# Available tags for Annual Qs:
+# ${pax}: The name of the PAX. This will not be tagged
+# ${qs_num}: The total number of posts for the PAX (i.e. 6)
+# ${qs_ord}: The ordinal version of the Q count (i.e. 6th)
+# ${last_q}: The date of the PAX's last Q, which should always be the curent date, in YYYY-MM-DD format
+# ${rank_num}: The rank of the PAX reaching this milestone. (i.e. 39)
+# ${rank_ord}: The ordinal version of the rank fo the PAX reaching this milestone (i.e. 39th)
+# ${pax_tag}: A tag for the post that will be a link to the user (i.e. @Ethanol)
+# ${current_year}: The current year
+annual_qs_milestone_template = "${qs_num} Qs in ${current_year}! ${pax_tag} just Qed his ${qs_ord} workout for " + f3_region + " this year."
+
 
 # Available tags for Weekly Stats:
 # ${week_ending}: The Saturday ending the week in <day>, <month> <date>, <year> format (i.e. Saturday, December 24, 2022)

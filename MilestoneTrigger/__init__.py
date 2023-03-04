@@ -15,6 +15,7 @@ import all_aos_milestone as aom
 import max_attendance_milestone as mam
 import weekly_stats_milestone as wsm
 import annual_posts_milestones as apm
+import annual_qs_milestone as aqm
 
 import azure.functions as func
 
@@ -89,6 +90,11 @@ def main(mytimer: func.TimerRequest) -> None:
                 max_att_posts = mam.get(connection, config.local_timezone, config.max_attendance_milestone_template)
                 posts += max_att_posts
                 logging.info(f"Max Attendance Milestone generated {len(max_att_posts)} Slack posts.")
+
+            # Qs this year
+            if config.use_annual_qs_milestone:
+                for num in config.annual_qs_milestone_numbers:
+                    annual_q_posts = aqm.get(connection, num, config.local_timezone, config.annual_qs_milestone_template)
 
     except Exception as err:
         logging.error("Failure: " + str(err))

@@ -2,13 +2,13 @@
 f3_region = "F3 Beast"
 
 ### Total Posts Milestone Settings
-use_total_posts_milestone = True
+use_total_posts_milestone = False
 total_post_milestone_numbers = [25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
 
 ### Annual Posts Milestone Settings
 use_annual_posts_milestone = True
 disable_annual_posts_for_first_year = True
-annual_post_milestone_numbers = [50, 100, 150, 200, 223]
+annual_post_milestone_numbers = [25, 50, 100, 150, 200, 223, 250, 300, 325, 350]
 
 ### Streak Milestone Settings
 use_streak_milestone = True
@@ -17,7 +17,7 @@ streak_divisor = 10
 ### Six Pack Milestone Settings
 use_six_pack_milestones = True
 
-### All AOs Milestone Settings
+### All AOs Milestone Settings (per year)
 use_all_aos_milestone = True
 
 ### Max Attendence Milestone Settings
@@ -64,7 +64,8 @@ streak_milestone_template = "${streak_count}-Day Streak! ${pax_tag} is on fire w
 # ${ao_count}: The number of AOs the PAX has been to (also the total number of AOs)
 # ${ao_count_ord}: The ordinal version of the AO count (i.e. 9th)
 # ${ao}: The AO that they just hit to get all the AOs
-all_aos_milestone_template = f3_region + " Traveler! ${pax_tag} has now posted at all ${ao_count} AOs in the region."
+# ${year}: The current year
+all_aos_milestone_template = "{$year} " + f3_region + " Traveler! ${pax_tag} has now posted at all ${ao_count} AOs in the region this year."
 
 # Available tags for Max Attendance:
 # ${ao}: The AO with the max attendance record for the day

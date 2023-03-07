@@ -5,7 +5,10 @@ import logging
 import string
 
 def get(connection, local_timezone, post_template):
-    sql = """
+    date_now = datetime.datetime.utcnow().replace(
+            tzinfo=datetime.timezone.utc).astimezone(
+                tz=pytz.timezone(local_timezone)).strftime('%Y-%m-%d')
+    sql = f"""
         WITH post_counts AS (
             SELECT
                 av.pax, 
@@ -14,7 +17,7 @@ def get(connection, local_timezone, post_template):
                 DATE_FORMAT( MAX(av.date), '%Y-%m-%d' ) AS last_post
             FROM attendance_view av 
             WHERE ao != 'ao-downrange' 
-            	AND av.date BETWEEN DATE_FORMAT(NOW(), '%Y-01-01') AND NOW()
+            	AND av.date BETWEEN DATE_FORMAT('{date_now}', '%Y-01-01') AND '{date_now}'
             GROUP BY pax, ao 
             ORDER BY pax, ao
         ),
@@ -25,7 +28,7 @@ def get(connection, local_timezone, post_template):
                 GROUP BY pax		
         )
         SELECT pc.pax, pc.ao, pc.num_posts, pc.last_post, uac.unique_aos,
-        	u.user_id, DATE_FORMAT(NOW(), '%Y') AS year
+        	u.user_id, DATE_FORMAT('{date_now}', '%Y') AS year
         FROM post_counts pc
         INNER JOIN unique_aos_count uac
             ON pc.pax = uac.pax

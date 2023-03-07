@@ -3,7 +3,7 @@ import unittest.mock as mock
 import datetime, pytz
 from freezegun import freeze_time
 
-import MilestoneTrigger.all_aos_milestone as milestones
+import MilestoneTrigger.annual_aos_milestone as milestones
 
 template ="Testing Name ${pax} last_post ${last_post} pax_tag ${pax_tag} ao_count ${ao_count} ao_count_ord ${ao_count_ord} ao ${ao}"
 
@@ -11,7 +11,7 @@ today = datetime.datetime.utcnow().replace(
             tzinfo=datetime.timezone.utc).astimezone(
                 tz=pytz.timezone("US/Central")).strftime('%Y-%m-%d')
 
-class TestTotalPosts(unittest.TestCase):
+class TestAnnualAOs(unittest.TestCase):
     def test_emptyquery(self):
         with mock.patch('mysql.connector.connection') as mock_conn:
             mock_conn.cursor = mock.MagicMock()

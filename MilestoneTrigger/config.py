@@ -17,8 +17,8 @@ streak_divisor = 10
 ### Six Pack Milestone Settings
 use_six_pack_milestones = True
 
-### All AOs Milestone Settings (per year)
-use_all_aos_milestone = True
+### Annual All AOs Milestone Settings (per year)
+use_annual_aos_milestone = True
 
 ### Max Attendence Milestone Settings
 use_max_attendance_milestone = True
@@ -69,7 +69,7 @@ streak_milestone_template = "${streak_count}-Day Streak! ${pax_tag} is on fire w
 # ${ao_count_ord}: The ordinal version of the AO count (i.e. 9th)
 # ${ao}: The AO that they just hit to get all the AOs
 # ${year}: The current year
-all_aos_milestone_template = "{$year} " + f3_region + " Traveler! ${pax_tag} has now posted at all ${ao_count} AOs in the region this year."
+annual_aos_milestone_template = "${year} " + f3_region + " Traveler! ${pax_tag} has now posted at all ${ao_count} AOs in the region this year."
 
 # Available tags for Max Attendance:
 # ${ao}: The AO with the max attendance record for the day

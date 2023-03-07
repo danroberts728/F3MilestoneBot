@@ -5,19 +5,23 @@ import logging
 import string
 
 def get(connection, number, local_timezone, post_template):
+    date_now = datetime.datetime.utcnow().replace(
+            tzinfo=datetime.timezone.utc).astimezone(
+                tz=pytz.timezone(local_timezone)).strftime('%Y-%m-%d')
+    
     sql = f"""  
         SELECT
             u.user_name AS pax, COUNT(u.user_id) as num_qs, 
-            MAX(b.bd_date) as last_q,
+            DATE_FORMAT(MAX(b.bd_date), '%Y-%m-%d') as last_q,
             ROW_NUMBER() OVER ( ORDER BY COUNT(u.user_id) DESC) AS rnk,
             u.user_id,
-            DATE_FORMAT(NOW(), '%Y') AS year
+            DATE_FORMAT('{date_now}', '%Y') AS year
         FROM beatdowns b 
         INNER JOIN users u 
             ON b.q_user_id = u.user_id
         INNER JOIN aos a 
             ON b.ao_id = a.channel_id
-        WHERE b.bd_date BETWEEN DATE_FORMAT(NOW(), '%Y-01-01') AND NOW()
+        WHERE b.bd_date BETWEEN DATE_FORMAT('{date_now}', '%Y-01-01') AND '{date_now}'
             AND a.ao != 'ao-downrange'
         GROUP BY u.user_name
         ORDER BY COUNT(u.user_id) DESC"""

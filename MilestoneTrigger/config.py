@@ -27,6 +27,9 @@ use_max_attendance_milestone = True
 use_annual_qs_milestone = True
 annual_qs_milestone_numbers = [6, 12, 23, 24, 52]
 
+### Annual All Qs Milestone Settings
+use_annual_all_qs_milestone = True
+
 ### Weekly Stats Milestone Settings
 use_weekly_stats_milestone = True
 
@@ -94,11 +97,20 @@ annual_post_milestone_template = "${posts_num} posts in ${current_year}! ${pax_t
 # ${qs_ord}: The ordinal version of the Q count (i.e. 6th)
 # ${last_q}: The date of the PAX's last Q, which should always be the curent date, in YYYY-MM-DD format
 # ${rank_num}: The rank of the PAX reaching this milestone. (i.e. 39)
-# ${rank_ord}: The ordinal version of the rank fo the PAX reaching this milestone (i.e. 39th)
+# ${rank_ord}: The ordinal version of the rank of the PAX reaching this milestone (i.e. 39th)
 # ${pax_tag}: A tag for the post that will be a link to the user (i.e. @Ethanol)
 # ${current_year}: The current year
-annual_qs_milestone_template = "${qs_num} Qs in ${current_year}! ${pax_tag} just Qed his ${qs_ord} workout for " + f3_region + " this year."
+annual_qs_milestone_template = "${qs_num} Qs in ${current_year}! ${pax_tag} just Q'ed his ${qs_ord} workout for " + f3_region + " this year."
 
+# Available tags for Annual All Qs:
+# ${pax}: The name of the PAX. This will not be tagged
+# ${pax_tag}: A tag for the post that will be a link to the user (i.e. @Ethanol)
+# ${ao}: The last AO the PAX Q'ed, which led to the milestone
+# ${last_q}: The date of the PAX's last Q, which should always be the current date, in YYYY-MM-DD format
+# ${unique_q_count}: the number of AOs the PAX has Q'ed  (i.e. 10)
+# ${unique_q_count_ord}: The ordinal version of the number of AOs the PAX has Q'ed (i.e. 10th)
+# ${current_year}: The current year
+annual_all_qs_milestone_template = "Travling Q! ${pax_tag} has now Q'ed all ${unique_q_count} AOs in " + f3_region + " this year."
 
 # Available tags for Weekly Stats:
 # ${week_ending}: The Saturday ending the week in <day>, <month> <date>, <year> format (i.e. Saturday, December 24, 2022)

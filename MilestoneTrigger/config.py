@@ -110,7 +110,7 @@ annual_qs_milestone_template = "${qs_num} Qs in ${current_year}! ${pax_tag} just
 # ${unique_q_count}: the number of AOs the PAX has Q'ed  (i.e. 10)
 # ${unique_q_count_ord}: The ordinal version of the number of AOs the PAX has Q'ed (i.e. 10th)
 # ${current_year}: The current year
-annual_all_qs_milestone_template = "Travling Q! ${pax_tag} has now Q'ed all ${unique_q_count} AOs in " + f3_region + " this year."
+annual_all_qs_milestone_template = "Q World Traveler! ${pax_tag} has now Q'ed at all ${unique_q_count} AOs in the region in ${current_year}."
 
 # Available tags for Weekly Stats:
 # ${week_ending}: The Saturday ending the week in <day>, <month> <date>, <year> format (i.e. Saturday, December 24, 2022)

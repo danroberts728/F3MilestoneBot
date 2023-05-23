@@ -21,7 +21,7 @@ post_channel_id = os.environ['F3M_SLACK_POST_CHANNEL_ID']
 
 class TestAnnualAosIntegration(unittest.TestCase):
 
-    @freeze_time('2023-02-08 14:00:00')
+    @freeze_time('2023-04-12 14:00:00')
     def test_annual_aos_milestone(self):
         # A little bit of a hack because we know Crafty hit his
         # final AO of the year on 2/8/2023 in the database 
@@ -34,8 +34,9 @@ class TestAnnualAosIntegration(unittest.TestCase):
         ) as connection:
             posts = aam.get(connection, 'US/Central', config.annual_aos_milestone_template)
 
-            assert len(posts) == 1
-            assert 'U02FAHPF2R0' in posts[0]
+            # New AO so there were actually 4
+            assert len(posts) == 4
+            assert 'U02FAHPF2R0' in posts[2]
         
 if __name__ == 'main':
     unittest.main()

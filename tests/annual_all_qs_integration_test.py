@@ -21,7 +21,7 @@ post_channel_id = os.environ['F3M_SLACK_POST_CHANNEL_ID']
 
 class TestAnnualAllQsIntegration(unittest.TestCase):
 
-    @freeze_time('2023-01-31 14:00:00')
+    @freeze_time('2023-05-17 14:00:00')
     def test_annual_aos_milestone(self):
         # A little bit of a hack because we know Dufresne
         # Q'ed his 10th AO on this date

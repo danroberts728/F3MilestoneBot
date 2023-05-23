@@ -16,6 +16,7 @@ import max_attendance_milestone as mam
 import weekly_stats_milestone as wsm
 import annual_posts_milestones as apm
 import annual_qs_milestone as aqm
+import annual_all_qs_milestone as aaqm
 
 import azure.functions as func
 
@@ -95,7 +96,15 @@ def main(mytimer: func.TimerRequest) -> None:
             # Qs this year
             if config.use_annual_qs_milestone:
                 for num in config.annual_qs_milestone_numbers:
-                    annual_q_posts = aqm.get(connection, num, config.local_timezone, config.annual_qs_milestone_template)
+                    annual_qs_posts = aqm.get(connection, num, config.local_timezone, config.annual_qs_milestone_template)
+                    posts += annual_qs_posts
+                    logging.info(f"Annual Qs Milestone generated {len(annual_qs_posts)} Slack posts.")
+
+            # All Qs this year
+            if config.use_annual_all_qs_milestone:
+                annual_all_qs_milestone += aaqm.get(connection, config.local_timezone, config.annual_all_qs_milestone_template)
+                posts += annual_all_qs_milestone
+                logging.info(f"Annual All Qs Milestone generated {len(annual_all_qs_milestone)} Slack posts.")
 
     except Exception as err:
         logging.error("Failure: " + str(err))

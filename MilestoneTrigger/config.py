@@ -132,6 +132,7 @@ Thursday: ${thu_count}
 Friday: ${fri_count}
 Saturday: ${sat_count}
 *Total: ${this_week_count}*
+Unique PAX: ${weekly_unique_count}
 
 Biggest count this year: ${max_week_count}
 Average count this year: ${avg_week_count}"""

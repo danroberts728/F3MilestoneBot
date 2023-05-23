@@ -13,6 +13,7 @@ template ="""Testing week_ending ${week_ending}
     sat_count ${sat_count}
     max_week_count ${max_week_count}
     avg_week_count ${avg_week_count}
+    weekly_unique_count ${weekly_unique_count}
     this_week_count ${this_week_count}"""
 
 sample_stats = [
@@ -30,6 +31,8 @@ sample_stats = [
 
 sample_get_result = [('12/19/2022','Monday',24),('12/20/2022','Tuesday',13),('12/21/2022','Wednesday',22),('12/22/2022','Thursday',15),
     ('12/23/2022','Friday',23),('12/24/2022','Saturday',9)]
+
+sample_get_weekly_unique = 34
 
 class TestWeeklyStats(unittest.TestCase):
     @freeze_time('2022-12-24 14:00:00')
@@ -52,7 +55,7 @@ class TestWeeklyStats(unittest.TestCase):
             mock_conn.cursor.return_value = cursor
             cursor.fetchall.return_value = sample_get_result
 
-            result = milestones.get(mock_conn, "US/Central", (181, 133.5), template)
+            result = milestones.get(mock_conn, "US/Central", (181, 133.5), sample_get_weekly_unique, template)
 
             assert len(result) == 1
             post = result[0]
@@ -65,6 +68,7 @@ class TestWeeklyStats(unittest.TestCase):
             assert "sat_count 9" in post
             assert "max_week_count 181" in post
             assert "avg_week_count 133.5" in post
+            assert "weekly_unique_count 34" in post
             assert "this_week_count 106" in post
         
 if __name__ == 'main':

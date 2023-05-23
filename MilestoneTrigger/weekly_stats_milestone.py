@@ -3,7 +3,7 @@ import logging
 import pytz
 import string
 
-def get(connection, local_timezone, annual_stats, post_template):
+def get(connection, local_timezone, annual_stats, weekly_unique_count, post_template):
     date_now = datetime.datetime.utcnow().replace(
             tzinfo=datetime.timezone.utc).astimezone(
                 tz=pytz.timezone(local_timezone)).strftime('%Y-%m-%d')
@@ -65,7 +65,8 @@ def get(connection, local_timezone, annual_stats, post_template):
                 sat_count = saturday_count,
                 this_week_count = weekly_total,
                 max_week_count = max_weekly_count,
-                avg_week_count = avg_weekly_count
+                avg_week_count = avg_weekly_count,
+                weekly_unique_count = weekly_unique_count
             )
             return [ string.Template(post_template).substitute(template_substitutes) ]
 
@@ -75,6 +76,33 @@ def get(connection, local_timezone, annual_stats, post_template):
 
     except Exception as e:
         logging.error("Failure: " + str(e))
+
+
+def get_weekly_unique(connection, local_timezone):
+    date_now = datetime.datetime.utcnow().replace(
+        tzinfo=datetime.timezone.utc).astimezone(
+            tz=pytz.timezone(local_timezone)).strftime('%Y-%m-%d')
+    sql_unique = f"""
+    SELECT COUNT(s.pax) AS unique_pax
+    FROM (
+        SELECT pax, COUNT(pax)
+        FROM attendance_view av 
+        WHERE av.date 
+            BETWEEN DATE_ADD('{date_now}', INTERVAL -6 DAY) AND '{date_now}'
+        GROUP BY pax
+    ) s 
+    """    
+    try:        
+        cursor = connection.cursor()
+        cursor.execute(sql_unique)
+        results = cursor.fetchall()
+        cursor.close()
+
+        return results[0][0]
+
+    except Exception as e:
+        logging.error("Failure: " + str(e))
+    
 
 def get_annual_max_avg(connection, local_timezone):
     date_now = datetime.datetime.utcnow().replace(
@@ -94,10 +122,6 @@ def get_annual_max_avg(connection, local_timezone):
     """
 
     try:
-        today = datetime.datetime.utcnow().replace(
-            tzinfo=datetime.timezone.utc).astimezone(
-                tz=pytz.timezone(local_timezone)).strftime('%A')
-        
         cursor = connection.cursor()
         cursor.execute(sql_stats)
         results = cursor.fetchall()

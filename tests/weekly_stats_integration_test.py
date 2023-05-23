@@ -33,7 +33,8 @@ class TestWeeklyStatsIntegration(unittest.TestCase):
             password=db_password
         ) as connection:
             stats = wsm.get_annual_max_avg(connection, "US/Central")
-            posts = wsm.get(connection, "US/Central", stats, config.weekly_stats_milestone_template)
+            weekly_unique = wsm.get_weekly_unique(connection, "US/Central")
+            posts = wsm.get(connection, "US/Central", stats, weekly_unique, config.weekly_stats_milestone_template)
 
             assert len(posts) == 1
             p = posts[0]
@@ -45,6 +46,7 @@ class TestWeeklyStatsIntegration(unittest.TestCase):
             assert "Friday: 23" in p
             assert "Saturday: 9" in p
             assert "Total: 103" in p
+            assert "Unique PAX: 52" in p
         
 if __name__ == 'main':
     unittest.main()

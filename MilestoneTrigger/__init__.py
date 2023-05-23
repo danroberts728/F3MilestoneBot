@@ -49,7 +49,8 @@ def main(mytimer: func.TimerRequest) -> None:
             # Weekly Stats
             if config.use_weekly_stats_milestone:
                 annual_stats = wsm.get_annual_max_avg(connection, config.local_timezone)
-                weekly_stats_posts = wsm.get(connection, config.local_timezone, annual_stats, config.weekly_stats_milestone_template)
+                weekly_unique_count = wsm.get_weekly_unique(connection, config.local_timezone)
+                weekly_stats_posts = wsm.get(connection, config.local_timezone, annual_stats, weekly_unique_count, config.weekly_stats_milestone_template)
                 posts += weekly_stats_posts
                 logging.info(f"Weekly Stats milestone generated {len(weekly_stats_posts)} Slack posts.")
 

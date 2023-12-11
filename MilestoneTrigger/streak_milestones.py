@@ -15,6 +15,7 @@ def get(connection, divisor, local_timezone, post_template):
                     bi.date
                 FROM beatdown_info bi
                 WHERE DAYOFWEEK(bi.date) != 1 # Always ignore Sundays
+                	AND DATE_FORMAT(bi.date, "%m-%d")  != "12-25" # Always ignore Christmas
                 ORDER BY bi.date
             ) s
         ),

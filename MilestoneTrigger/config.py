@@ -18,7 +18,7 @@ streak_divisor = 10
 use_six_pack_milestones = True
 
 ### Annual All AOs Milestone Settings (per year)
-use_annual_aos_milestone = True
+use_annual_aos_milestone = False
 
 ### Max Attendence Milestone Settings
 use_max_attendance_milestone = True
@@ -28,7 +28,7 @@ use_annual_qs_milestone = True
 annual_qs_milestone_numbers = [6, 12, 23, 24, 52]
 
 ### Annual All Qs Milestone Settings
-use_annual_all_qs_milestone = True
+use_annual_all_qs_milestone = False
 
 ### Weekly Stats Milestone Settings
 use_weekly_stats_milestone = True

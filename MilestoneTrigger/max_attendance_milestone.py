@@ -5,11 +5,13 @@ import string
 
 def get(connection, local_timezone, post_template):
     sql = """   
-        SELECT DATE_FORMAT( bi.date, '%Y-%m-%d' ) AS date, ao, q, pax_count, u.user_id as q_id
+        SELECT DATE_FORMAT( bi.date, '%Y-%m-%d' ) AS date, ao, q, pax_co
+        unt, u.user_id as q_id
         FROM beatdown_info bi
         INNER JOIN (
             SELECT MAX(pax_count) max_pax_count 
             FROM beatdown_info bi2 
+            WHERE bi2.ao != 'ao-downrange'
         ) s ON bi.pax_count = s.max_pax_count
         INNER JOIN users u 
         	ON u.user_name = bi.q

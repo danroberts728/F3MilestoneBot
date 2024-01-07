@@ -89,6 +89,7 @@ def get_weekly_unique(connection, local_timezone):
         FROM attendance_view av 
         WHERE av.date 
             BETWEEN DATE_ADD('{date_now}', INTERVAL -6 DAY) AND '{date_now}'
+            AND av.ao != 'ao-downrange'
         GROUP BY pax
     ) s 
     """    
@@ -116,6 +117,7 @@ def get_annual_max_avg(connection, local_timezone):
         FROM beatdown_info bi
         WHERE bi.date 
             BETWEEN DATE_FORMAT('{date_now}', '%Y-01-01') AND '{date_now}'
+            AND bi.ao != 'ao-downrange'
         GROUP BY WEEK(bi.date, 3)
         HAVING wk <= WEEK('{date_now}', 3) 
         ORDER BY WEEK(bi.date, 3);

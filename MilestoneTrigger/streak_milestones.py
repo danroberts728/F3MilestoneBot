@@ -29,6 +29,8 @@ def get(connection, divisor, local_timezone, post_template):
                 SELECT DISTINCT av.pax, av.date
                 FROM attendance_view av
             ) s
+            WHERE DAYOFWEEK(s.date) != 1 # Always ignore Sundays
+                	AND DATE_FORMAT(s.date, "%m-%d")  != "12-25" # Always ignore Christmas
             ORDER BY s.pax, s.date
         ),
         streak_groups AS (

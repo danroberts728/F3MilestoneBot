@@ -2,8 +2,8 @@
 f3_region = "F3 Beast"
 
 ### Total Posts Milestone Settings
-use_total_posts_milestone = False
-total_post_milestone_numbers = [25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
+use_total_posts_milestone = True
+total_post_milestone_numbers = [500, 750, 1000, 5000]
 
 ### Annual Posts Milestone Settings
 use_annual_posts_milestone = True
@@ -21,7 +21,7 @@ use_six_pack_milestones = True
 use_annual_aos_milestone = False
 
 ### Max Attendence Milestone Settings
-use_max_attendance_milestone = True
+use_max_attendance_milestone = False
 
 ### Annual Qs Milestone Settings
 use_annual_qs_milestone = True

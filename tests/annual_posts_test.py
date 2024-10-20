@@ -101,5 +101,22 @@ class TestAnnualPosts(unittest.TestCase):
             assert "posts_weekly_avg 4.3" in ethanol
             assert "current_year 2022" in ethanol
 
+    @freeze_time('2022-12-04 14:00:00')
+    def test_dont_disable_first_year(self):
+        with mock.patch('mysql.connector.connection') as mock_conn:
+            cursor = mock.MagicMock()
+            mock_conn.cursor.return_value = cursor
+            cursor.fetchall.return_value = [
+                ('Spit Valve', 250, 4.1, '2022-12-04', '2022', 'U1'),
+                ('Crafty', 200, 4.2, '2022-12-04', '2022', 'U2'), # Match
+                ('Ethanol', 200, 4.3, '2022-12-04', '2021', 'U3'), # Match
+                ('Breach', 200, 4.4, '2022-12-03', '2022', 'U4'),
+                ('Gipper', 187, 4.5, '2022-12-04', '2022', 'U5')
+            ]
+
+            result = milestones.get(mock_conn, 200, "US/Central", template, False)
+
+            assert len(result) == 2
+
 if __name__ == 'main':
     unittest.main()

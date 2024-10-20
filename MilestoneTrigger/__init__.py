@@ -102,9 +102,9 @@ def main(mytimer: func.TimerRequest) -> None:
 
             # All Qs this year
             if config.use_annual_all_qs_milestone:
-                annual_all_qs_milestone += aaqm.get(connection, config.local_timezone, config.annual_all_qs_milestone_template)
-                posts += annual_all_qs_milestone
-                logging.info(f"Annual All Qs Milestone generated {len(annual_all_qs_milestone)} Slack posts.")
+                annual_all_qs_posts = aaqm.get(connection, config.local_timezone, config.annual_all_qs_milestone_template)
+                posts += annual_all_qs_posts
+                logging.info(f"Annual All Qs Milestone generated {len(annual_all_qs_posts)} Slack posts.")
 
     except Exception as err:
         logging.error("Failure: " + str(err))

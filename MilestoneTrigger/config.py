@@ -8,7 +8,7 @@ total_post_milestone_numbers = [500, 750, 1000, 5000]
 ### Annual Posts Milestone Settings
 use_annual_posts_milestone = True
 disable_annual_posts_for_first_year = False
-annual_post_milestone_numbers = [25, 50, 100, 150, 200, 223, 250, 300, 325, 350]
+annual_post_milestone_numbers = [25, 50, 100, 150, 200, 250, 300, 325, 350]
 
 ### Streak Milestone Settings
 use_streak_milestone = True
@@ -25,7 +25,7 @@ use_max_attendance_milestone = False
 
 ### Annual Qs Milestone Settings
 use_annual_qs_milestone = True
-annual_qs_milestone_numbers = [6, 12, 23, 24, 52]
+annual_qs_milestone_numbers = [6, 12, 24, 52]
 
 ### Annual All Qs Milestone Settings
 use_annual_all_qs_milestone = False

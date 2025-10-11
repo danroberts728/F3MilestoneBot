@@ -1,6 +1,7 @@
 import unittest
 import unittest.mock as mock
-import datetime, pytz
+import datetime
+import pytz
 
 import MilestoneTrigger.total_posts_milestones as milestones
 

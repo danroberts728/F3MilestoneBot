@@ -1,6 +1,5 @@
 import unittest
 import unittest.mock as mock
-from datetime import datetime
 from freezegun import freeze_time
 
 import MilestoneTrigger.sixpack_milestones as milestones

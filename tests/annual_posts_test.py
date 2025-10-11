@@ -1,6 +1,5 @@
 import unittest
 import unittest.mock as mock
-import datetime, pytz
 from freezegun import freeze_time
 
 import MilestoneTrigger.annual_posts_milestones as milestones

@@ -1,9 +1,9 @@
 import datetime
 import logging
 import mysql.connector
-import sys, os
+import sys
+import os
 from slack_sdk import WebClient
-from slack_sdk.errors import SlackApiError
 from dotenv import load_dotenv
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__))))

@@ -1,9 +1,6 @@
 import unittest
-import unittest.mock as mock
 import mysql.connector
 
-import MilestoneTrigger.common as common
-import MilestoneTrigger.config as config
 
 import os
 from dotenv import load_dotenv
@@ -29,7 +26,7 @@ class TestDbConnection(unittest.TestCase):
             ) as connection:
                 cursor = connection.cursor()
                 cursor.execute("SELECT CURDATE() FROM dual")
-                result = list(cursor.fetchall())
+                result = list(cursor.fetchall())  # noqa: F841
             cursor.close
         except Exception as err:
             self.fail(str(err))
